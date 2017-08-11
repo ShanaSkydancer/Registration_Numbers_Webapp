@@ -1,0 +1,80 @@
+@import "colors/colors";
+@import "style/style";
+
+body{
+    background-color: $aliceblue;
+    font-family: $font-body;
+}
+
+h1{
+    font-size: $h1;
+    font-family: $font-stack;
+    text-align: center;
+    color: $black;
+}
+
+h2{
+    font-family: $font-body;
+    font-size: $h2;
+    text-align: center;
+}
+
+.inputForm{
+    text-align: center;
+        .regiInput{
+            font-size: $input;
+            width: 280px;
+            height: 65px;
+            border: 1px solid $black;
+            padding: 5px;
+    }
+}
+
+// .filterform{
+//     text-align: center;
+        .radioButtons{
+            font-family: $font-body;
+            padding-top: 20px;
+    }
+// }
+
+.regiOutput{
+    text-align: center;
+        ul{
+            list-style-type: none !important;
+            padding: 0;
+            margin-top: 2em;
+            text-align: center;
+                li{
+                    font-family: $font-body;
+                    font-size: $li;
+                    display: inline-block;
+                    font-weight: bold;
+                    text-align: center;
+                    color: $black;
+                    border-collapse: separate;
+                    border-radius: 25px;
+                    padding: 25px;
+                    width: 140px;
+                    border: 6px solid $black;
+                    background: $yellow;
+                    list-style-type: none !important;
+                    margin: 0 0 5px 0;
+                    text-align: center;
+        }
+    }
+}
+
+.info{
+    color: $green;
+    font-size: $flash;
+    font-family: $font-body;
+    text-align: center;
+}
+
+.error{
+    color: $red;
+    font-size: $flash;
+    font-family: $font-body;
+    text-align: center;
+}

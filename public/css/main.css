@@ -1,0 +1,63 @@
+body {
+  background-color: #F0F8FF;
+  font-family: "Ubuntu", sans-serif; }
+
+h1 {
+  font-size: 60px;
+  font-family: "Zilla Slab Highlight", cursive;
+  text-align: center;
+  color: #000000; }
+
+h2 {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 42px;
+  text-align: center; }
+
+.inputForm {
+  text-align: center; }
+  .inputForm .regiInput {
+    font-size: 20px;
+    width: 280px;
+    height: 65px;
+    border: 1px solid #000000;
+    padding: 5px; }
+
+.radioButtons {
+  font-family: "Ubuntu", sans-serif;
+  padding-top: 20px; }
+
+.regiOutput {
+  text-align: center; }
+  .regiOutput ul {
+    list-style-type: none !important;
+    padding: 0;
+    margin-top: 2em;
+    text-align: center; }
+    .regiOutput ul li {
+      font-family: "Ubuntu", sans-serif;
+      font-size: 25px;
+      display: inline-block;
+      font-weight: bold;
+      text-align: center;
+      color: #000000;
+      border-collapse: separate;
+      border-radius: 25px;
+      padding: 25px;
+      width: 140px;
+      border: 6px solid #000000;
+      background: #FFFF00;
+      list-style-type: none !important;
+      margin: 0 0 5px 0;
+      text-align: center; }
+
+.info {
+  color: #25E13E;
+  font-size: 15px;
+  font-family: "Ubuntu", sans-serif;
+  text-align: center; }
+
+.error {
+  color: #F21A1A;
+  font-size: 15px;
+  font-family: "Ubuntu", sans-serif;
+  text-align: center; }

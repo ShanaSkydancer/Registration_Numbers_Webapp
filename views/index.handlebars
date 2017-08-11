@@ -1,0 +1,50 @@
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="/public/images/favicon.ico">
+    <title>Backend Registration Numbers Webapp</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu|Zilla+Slab+Highlight:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Zilla+Slab+Highlight:700" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+  </head>
+
+  <body>
+      <h1 class="heading1">Registration Number Webapp</h1>
+      <h2 class="heading2">Enter a Registration Number:</h2>
+    <form class="inputForm" action="/reginumbers/add" method="post">
+        <input class="regiInput" type="text" name="regiInput" placeholder="Registration Number..." />
+        <input id="enterButton" type="submit" name="enterButton" value="Add">
+    {{!-- </form> --}}
+
+      {{!-- <form class="filterForm" action="/reginumbers" method="post"> --}}
+        <div class="radioButtons">
+          <input type="radio" name="radioButt" value="capetown"> Cape Town
+          <input type="radio" name="radioButt" value="bellville"> Bellville
+          <input type="radio" name="radioButt" value="malmesbury"> Malmesbury
+          <input type="radio" name="radioButt" value="malmesbury"> Malmesbury
+          <input id="filterButton" type="submit" name="filterButt" value="Fliter">
+        </div>
+      </form>
+
+    {{#if messages.info}}
+      <div class="info">
+        {{messages.info}}
+      </div>
+    {{/if}}
+
+    {{#if messages.error}}
+      <div class="error">
+        {{messages.error}}
+      </div>
+    {{/if}}
+
+    <div class="regiOutput">
+      <ul>
+        {{#each regiDisplay}}
+        <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    </div>
+
+
+  </body>
