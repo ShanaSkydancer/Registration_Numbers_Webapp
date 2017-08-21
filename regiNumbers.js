@@ -1,19 +1,19 @@
-module.exports = function() {
+module.exports = () => {
+'use strict';
+
 var allregiInputs = [];
+var filteredRegiList = [];
 var regiData = "";
 
-    const index = function(req, res){
+    const index = (req, res) => {
         regiData = {regiDisplay : allregiInputs};
         res.render("index", regiData);
     }
 
-    const add = function(req, res){
+    const add = (req, res) => {
         var regiInput = req.body.regiInput;
-        var radioButt = req.body.radioButt;
-        var enterButton = req.body.enterButton;
-        var filterButton = req.body.filterButton;
 
-        var foundRegiNum = allregiInputs.find(function(currentRegiNum){
+        var foundRegiNum = allregiInputs.find((currentRegiNum) => {
             return currentRegiNum === regiInput;
         });
 
@@ -23,7 +23,7 @@ var regiData = "";
         else{
             if (!foundRegiNum){
                 allregiInputs.push(regiInput);
-                req.flash('info', 'Registration has already been added to the list!')
+                req.flash('info', 'Registration has been added to the list!')
             }
             else{
             req.flash('error', 'Registration number not added!')
@@ -34,30 +34,27 @@ var regiData = "";
         // res.redirect('/reginumbers');
     }
 
-    const filter = function(req, res){
-        var regiList = {};
-        var filterList = "";
-        var regiInput = req.body.regiInput;
+    const filter = (req, res) => {
         var radioButt = req.body.radioButt;
-        var enterButton = req.body.enterButton;
-        var filterButton = req.body.filterButton;
-            for (value in radioButt){
-                if (value == 'capetown'){
-                    filterList = 'CA'
-                }
-                if (value == 'bellville'){
-                    filterList = 'CY'
-                }
-                if (value == 'malmesbury'){
-                    filterList = 'CJ'
-                }
-                // else if (value == 'all'){
-                    
-                // }
-            }
-            return regiInput.startsWith(filterList);
-            res.render("index", regiList);
-        };
+
+            for(let i = 0; i < allregiInputs.length; i++) {
+                let currentRegiNum = allregiInputs[i];
+                if (radioButt === 'capetown' && currentRegiNum.startsWith('CA')) {
+                    filteredRegiList.push(currentRegiNum);
+                } else if (radioButt === 'bellville' && currentRegiNum.startsWith('CY')) {
+                    filteredRegiList.push(currentRegiNum);
+                } else if (radioButt === 'malmesbury' && currentRegiNum.startsWith('CJ')) {
+                    filteredRegiList.push(currentRegiNum);
+                } 
+                // else if (radioButt === 'all') {
+                //     filteredRegiList.push(currentRegiNum);
+                // };
+            };
+            // return filteredRegiList
+            regiData = {regiDisplay : filteredRegiList};
+            res.render("index", regiData);
+
+    }
 
     return {
         index,

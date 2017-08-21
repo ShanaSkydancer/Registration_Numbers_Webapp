@@ -13,16 +13,16 @@
       <h2 class="heading2">Enter a Registration Number:</h2>
     <form class="inputForm" action="/reginumbers/add" method="post">
         <input class="regiInput" type="text" name="regiInput" placeholder="Registration Number..." />
-        <input id="enterButton" type="submit" name="enterButton" value="Add">
-    {{!-- </form> --}}
+        <button id="enterButton" type="submit" name="enterButton" value="Add">ADD</button>
+     </form> 
 
-      {{!-- <form class="filterForm" action="/reginumbers" method="post"> --}}
+      <form class="filterForm" action="/reginumbers/filter" method="post"> 
         <div class="radioButtons">
           <input type="radio" name="radioButt" value="capetown"> Cape Town
           <input type="radio" name="radioButt" value="bellville"> Bellville
           <input type="radio" name="radioButt" value="malmesbury"> Malmesbury
-          <input type="radio" name="radioButt" value="malmesbury"> Malmesbury
-          <input id="filterButton" type="submit" name="filterButt" value="Fliter">
+          <input type="radio" name="radioButt" value="all"> ALL
+          <button id="filterButton" type="submit" name="filterButt" value="filter">FILTER</button>
         </div>
       </form>
 
@@ -41,10 +41,30 @@
     <div class="regiOutput">
       <ul>
         {{#each regiDisplay}}
+        <br>
+        <br>
+        <br>
         <li>{{this}}</li>
+        {{!-- <br> --}}
+        <br>
+        <br>
         {{/each}}
       </ul>
     </div>
 
+     <div class="filteredRegiOutput">
+      <ul>
+         {{#each regiFilter}}
+        <br>
+        <br>
+        <br> --}}
+         <li>{{this}}</li> --}}
+        {{!-- <br>  --}}
+        <br>
+        <br>
+          {{/each}} 
+        </ul>
+      </div>
 
-  </body>
+
+    </body> 

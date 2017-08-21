@@ -9,10 +9,6 @@ const mongoose = require('mongoose');
 const $ = require("jquery");
 const format = require("util").format;
 
-//Connect Mongoose to your .js and have it access the MongoBD
-// mongoose.createConnection('mongodb://localhost/registration_numbers');
-
-
 var app = express();
 
 //Folders being accessed
@@ -22,6 +18,27 @@ app.use(express.static('public'));
 app.use(express.static('views'));
 //'routes' is where my specific handlebar templates and js functions are
 app.use(express.static('routes'));
+
+//Connect Mongoose to your .js and have it access the MongoBD
+const mongoURL = process.env.MONGO_DB_URL || "mongodb://localhost/registration_numbers";
+mongoose.connect(mongoURL);
+
+var MONGO_DB_URL = "mongodb://ShanaSkydancer:ilovekuromi17@ds153413.mlab.com:53413/registration_numbers";
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+console.log('Connected to the DB!');
+});
+
+var regiSchema = mongoose.Schema({
+    regiNum: String
+});
+
+const regiNumModel = mongoose.model('regiNumModel', regiSchema);
+// return {
+//   regiNumModel
+// };
 
 //Port and environment variable
 app.set('port', (process.env.PORT || 3000));
@@ -66,9 +83,10 @@ app.get('/reginumbers', regiListRoutes.index);
 //Route to add regitnumbers
 app.get('/reginumbers/add', regiListRoutes.add);
 //Route that filters witht the radio buttons
-app.get('/reginumbers', regiListRoutes.filter);
+app.get('/reginumbers/filter', regiListRoutes.filter);
 //Post data
 app.post('/reginumbers/add', regiListRoutes.add);
+app.post('/reginumbers/filter', regiListRoutes.filter);
 
 //Use debugger with node-inspector
 //Used it at the beginning of my code but it can go anywhere or I can create a break in the inspector

@@ -30,13 +30,13 @@ h2{
     }
 }
 
-// .filterform{
-//     text-align: center;
+.filterform{
+    text-align: center;
         .radioButtons{
             font-family: $font-body;
             padding-top: 20px;
     }
-// }
+}
 
 .regiOutput{
     text-align: center;
@@ -48,21 +48,30 @@ h2{
                 li{
                     font-family: $font-body;
                     font-size: $li;
-                    display: inline-block;
+                    display: inline;
                     font-weight: bold;
                     text-align: center;
                     color: $black;
                     border-collapse: separate;
                     border-radius: 25px;
                     padding: 25px;
-                    width: 140px;
+                    width: 20%;
                     border: 6px solid $black;
                     background: $yellow;
                     list-style-type: none !important;
-                    margin: 0 0 5px 0;
-                    text-align: center;
+                    margin: 0 0 2em 0;
         }
     }
+}
+
+button {
+  background-color: $gray;
+  font-size: $button;
+  margin-left: 2em;
+  cursor: pointer;
+}
+button:hover {
+  background-color: $grayhover;
 }
 
 .info{

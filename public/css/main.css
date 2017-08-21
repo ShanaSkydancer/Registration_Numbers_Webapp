@@ -22,9 +22,11 @@ h2 {
     border: 1px solid #000000;
     padding: 5px; }
 
-.radioButtons {
-  font-family: "Ubuntu", sans-serif;
-  padding-top: 20px; }
+.filterform {
+  text-align: center; }
+  .filterform .radioButtons {
+    font-family: "Ubuntu", sans-serif;
+    padding-top: 20px; }
 
 .regiOutput {
   text-align: center; }
@@ -36,19 +38,27 @@ h2 {
     .regiOutput ul li {
       font-family: "Ubuntu", sans-serif;
       font-size: 25px;
-      display: inline-block;
+      display: inline;
       font-weight: bold;
       text-align: center;
       color: #000000;
       border-collapse: separate;
       border-radius: 25px;
       padding: 25px;
-      width: 140px;
+      width: 20%;
       border: 6px solid #000000;
       background: #FFFF00;
       list-style-type: none !important;
-      margin: 0 0 5px 0;
-      text-align: center; }
+      margin: 0 0 2em 0; }
+
+button {
+  background-color: #989898;
+  font-size: 20px;
+  margin-left: 2em;
+  cursor: pointer; }
+
+button:hover {
+  background-color: #B9B8B8; }
 
 .info {
   color: #25E13E;
