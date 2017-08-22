@@ -8,7 +8,7 @@ var regiData = "";
     const index = (req, res) => {
         regiData = {regiDisplay : allregiInputs};
         res.render("index", regiData);
-    }
+    };
 
     const add = (req, res) => {
         var regiInput = req.body.regiInput;
@@ -32,10 +32,14 @@ var regiData = "";
         regiData = {regiDisplay : allregiInputs};
         res.render("index", regiData);
         // res.redirect('/reginumbers');
-    }
+    };
 
     const filter = (req, res) => {
+        var regiInput = req.body.regiInput;
         var radioButt = req.body.radioButt;
+        var filterButton = req.body.filterButton;
+
+        filteredRegiList = [];
 
             for(let i = 0; i < allregiInputs.length; i++) {
                 let currentRegiNum = allregiInputs[i];
@@ -45,20 +49,40 @@ var regiData = "";
                     filteredRegiList.push(currentRegiNum);
                 } else if (radioButt === 'malmesbury' && currentRegiNum.startsWith('CJ')) {
                     filteredRegiList.push(currentRegiNum);
-                } 
-                // else if (radioButt === 'all') {
-                //     filteredRegiList.push(currentRegiNum);
-                // };
+                } else if (radioButt === 'all') {
+                    filteredRegiList.push(currentRegiNum);
+                };
             };
-            // return filteredRegiList
             regiData = {regiDisplay : filteredRegiList};
             res.render("index", regiData);
-
-    }
+    };
+                
+    //     regiNumModel.findOne({regNum: regiInput}, (err, result) => {
+    //     var newRegiNum = new regiNumModel({
+    //         regiNum: String
+    //     });
+    //     newRegiNum.save((err) => {
+    //         if (err) {
+    //             console.log(err);
+    //         }
+    //     });
+        
+    //     if (filterButton) {
+    //         filter((err, result) => {
+    //             if (err) {
+    //                 console.log(err)
+    //             } else {
+    //                 console.log(result);
+    //                 regiData = {regiDisplay : filteredRegiList};
+    //                 res.render("index", regiData);
+    //             }
+    //         });
+    //     }
+    // });
 
     return {
         index,
         add,
         filter
     }
-}
+};

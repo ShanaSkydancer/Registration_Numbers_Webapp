@@ -23,7 +23,7 @@ app.use(express.static('routes'));
 const mongoURL = process.env.MONGO_DB_URL || "mongodb://localhost/registration_numbers";
 mongoose.connect(mongoURL);
 
-var MONGO_DB_URL = "mongodb://ShanaSkydancer:ilovekuromi17@ds153413.mlab.com:53413/registration_numbers";
+// var MONGO_DB_URL = "mongodb://ShanaSkydancer:ilovekuromi17@ds153413.mlab.com:53413/registration_numbers";
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -36,9 +36,6 @@ var regiSchema = mongoose.Schema({
 });
 
 const regiNumModel = mongoose.model('regiNumModel', regiSchema);
-// return {
-//   regiNumModel
-// };
 
 //Port and environment variable
 app.set('port', (process.env.PORT || 3000));
@@ -98,34 +95,3 @@ debugger;
   var port = server.address().port;
   console.log('Registration Numbers Webapp listening at http://%s:%s', host, port);
 });
-
-//app.post registratonnumbers
-    // regiData = {regiDisplay : regiinput};
-  // var getRegiNumber = (regiinput, (err, result) => {
-  //   if (result){
-  //     console.log("Error 1");
-  //     regiData = {regiDisplay : regiinput};
-  //     res.render("index", regiData);
-  //     req.flash('info', 'Registration number added!');
-  //   }
-  //   if (!result){
-  //     console.log("Error 1");
-  //     regiData = {regiDisplay : regiinput};
-  //     res.render("index", regiData);
-  //     req.flash('error', 'Do no leave the Registration number blank!');
-  //   }
-  //   if (err){
-  //     console.log("Error 1");
-  //     regiData = {regiDisplay : regiinput};
-  //     res.render("index", regiData);
-  //     req.flash('error', 'Enter a reigstration number!');
-  //   } else {
-  //       console.log("Error 1");
-  //       res.render("index", regiData);
-  //       req.flash('error', 'Something went wrong...!');
-  //   }
-  // })
-  // var regiList = FilterList(allregiinputs, radioButt)
-  //   regiData = {regiDisplay : regiList};
-  //   res.render("index", regiData)
-  //   res.redirect('/reginumbers')
