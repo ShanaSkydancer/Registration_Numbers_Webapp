@@ -1,37 +1,55 @@
-module.exports = () => {
+module.exports = (regiNumModel) => {
 'use strict';
 
-var allregiInputs = [];
+//Use debugger with node-inspector
+//Used it at the beginning of my code but it can go anywhere or I can create a break in the inspector
+debugger;
+
+var allRegiInputs = [];
 var filteredRegiList = [];
 var regiData = "";
 
     const index = (req, res) => {
-        regiData = {regiDisplay : allregiInputs};
-        res.render("index", regiData);
+        res.render("index", regiNum);
     };
 
-    const add = (req, res) => {
-        var regiInput = req.body.regiInput;
-
-        var foundRegiNum = allregiInputs.find((currentRegiNum) => {
-            return currentRegiNum === regiInput;
-        });
+    const add = (req, res, next) => {
+        let regiInput = req.body.regiInput;
 
         if(!regiInput){
             req.flash('error', 'Registration should not be blank!')
-        }
-        else{
-            if (!foundRegiNum){
-                allregiInputs.push(regiInput);
-                req.flash('info', 'Registration has been added to the list!')
-            }
-            else{
-            req.flash('error', 'Registration number not added!')
-            }
-        }
-        regiData = {regiDisplay : allregiInputs};
-        res.render("index", regiData);
-        // res.redirect('/reginumbers');
+        } else {
+            regiNumModel.findOne({regiNum: regiInput}, (err, result) => {
+                if (err){
+                    return next(err);
+                    console.log('Error trying to find registration number');                    
+                } else {
+                    if (!result) {
+                        console.log(result);
+                        var newRegiNum = new regiNumModel({
+                            regiNum: regiInput
+                        });
+                        newRegiNum.save((err) => {
+                            if (err) {
+                                return next(err);
+                            } else {
+                                console.log('Successfully added!');
+                                req.flash('info', 'Successfully added!')                                
+                                regiNumModel.find({})
+                                    .then((collection) => {
+                                        res.render("index", {
+                                            regiDisplay : collection
+                                        });
+                                    });
+                            };
+                        });
+                    } else {
+                        req.flash('error', 'Number has already been added!');
+                        res.render('index');
+                    }
+                };
+            });
+        };
     };
 
     const filter = (req, res) => {
@@ -39,46 +57,28 @@ var regiData = "";
         var radioButt = req.body.radioButt;
         var filterButton = req.body.filterButton;
 
-        filteredRegiList = [];
+        regiNumModel.find({})
+            .then((allRegiInputs) => {
 
-            for(let i = 0; i < allregiInputs.length; i++) {
-                let currentRegiNum = allregiInputs[i];
-                if (radioButt === 'capetown' && currentRegiNum.startsWith('CA')) {
-                    filteredRegiList.push(currentRegiNum);
-                } else if (radioButt === 'bellville' && currentRegiNum.startsWith('CY')) {
-                    filteredRegiList.push(currentRegiNum);
-                } else if (radioButt === 'malmesbury' && currentRegiNum.startsWith('CJ')) {
-                    filteredRegiList.push(currentRegiNum);
-                } else if (radioButt === 'all') {
-                    filteredRegiList.push(currentRegiNum);
+                filteredRegiList = [];
+
+                for(let i = 0; i < allRegiInputs.length; i++) {
+                    let currentRegiNum = allRegiInputs[i].regiNum;
+                    if (radioButt === 'capetown' && currentRegiNum.startsWith('CA')) {
+                        filteredRegiList.push(allRegiInputs[i]);
+                    } else if (radioButt === 'bellville' && currentRegiNum.startsWith('CY')) {
+                        filteredRegiList.push(allRegiInputs[i]);
+                    } else if (radioButt === 'malmesbury' && currentRegiNum.startsWith('CJ')) {
+                        filteredRegiList.push(allRegiInputs[i]);
+                    } else if (radioButt === 'all') {
+                        filteredRegiList.push(allRegiInputs[i]);
+                    };
                 };
-            };
-            regiData = {regiDisplay : filteredRegiList};
-            res.render("index", regiData);
+
+                regiData = {regiDisplay : filteredRegiList};
+                res.render("index", regiData);
+            });
     };
-                
-    //     regiNumModel.findOne({regNum: regiInput}, (err, result) => {
-    //     var newRegiNum = new regiNumModel({
-    //         regiNum: String
-    //     });
-    //     newRegiNum.save((err) => {
-    //         if (err) {
-    //             console.log(err);
-    //         }
-    //     });
-        
-    //     if (filterButton) {
-    //         filter((err, result) => {
-    //             if (err) {
-    //                 console.log(err)
-    //             } else {
-    //                 console.log(result);
-    //                 regiData = {regiDisplay : filteredRegiList};
-    //                 res.render("index", regiData);
-    //             }
-    //         });
-    //     }
-    // });
 
     return {
         index,

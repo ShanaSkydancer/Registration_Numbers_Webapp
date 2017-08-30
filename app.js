@@ -23,18 +23,16 @@ app.use(express.static('routes'));
 const mongoURL = process.env.MONGO_DB_URL || "mongodb://localhost/registration_numbers";
 mongoose.connect(mongoURL);
 
-// var MONGO_DB_URL = "mongodb://ShanaSkydancer:ilovekuromi17@ds153413.mlab.com:53413/registration_numbers";
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-console.log('Connected to the DB!');
+  console.log('Connected to the DB!');
 });
 
 var regiSchema = mongoose.Schema({
-    regiNum: String
+  regiNum: String
 });
-
 const regiNumModel = mongoose.model('regiNumModel', regiSchema);
 
 //Port and environment variable
@@ -64,13 +62,11 @@ app.use(flash());
 
 //Functions being accessed
 const RegiListRoutes = require("./regiNumbers");
-// const FilterListRoutes = require("./filterList");
 
 //Access the function
-const regiListRoutes = RegiListRoutes();
-// const filterListRoutes = FilterListRoutes();
+const regiListRoutes = RegiListRoutes(regiNumModel);
 
-//Using "/" makes it the "index page" ie it has no route
+//Using "/" makes it the "index page" i.e. it has no route
 app.get('/', (req, res) => {
     res.render("index");
 });
@@ -84,10 +80,6 @@ app.get('/reginumbers/filter', regiListRoutes.filter);
 //Post data
 app.post('/reginumbers/add', regiListRoutes.add);
 app.post('/reginumbers/filter', regiListRoutes.filter);
-
-//Use debugger with node-inspector
-//Used it at the beginning of my code but it can go anywhere or I can create a break in the inspector
-debugger;
 
 //Hosts my server
   var server = app.listen(app.get("port"), () => {
